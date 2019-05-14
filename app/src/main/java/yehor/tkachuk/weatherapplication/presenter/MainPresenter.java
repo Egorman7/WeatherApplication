@@ -1,5 +1,7 @@
 package yehor.tkachuk.weatherapplication.presenter;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -30,6 +32,7 @@ public class MainPresenter {
             @Override
             public void onSuccess(WeatherDataModel[] weatherDataModels) {
                 view.setDailyData(new ArrayList<>(Arrays.asList(weatherDataModels)));
+                view.setCityName(WeatherDataModel.getCity());
             }
 
             @Override
@@ -38,22 +41,23 @@ public class MainPresenter {
                 e.printStackTrace();
             }
         });
-        model.getGeocoding(lat + ", " + lon, new SingleObserver<GeocodingDataModel>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onSuccess(GeocodingDataModel geocodingDataModel) {
-                view.setCityName(geocodingDataModel.getCity());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        });
+//        model.getGeocoding(String.format("%1$.0f",lat) + "," + String.format("%1$.0f",lon), new SingleObserver<GeocodingDataModel>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//                view.showToast("Loading city name...");
+//            }
+//
+//            @Override
+//            public void onSuccess(GeocodingDataModel geocodingDataModel) {
+//                Log.d(MainPresenter.class.getSimpleName(), geocodingDataModel.getLat() + "; " + geocodingDataModel.getLon() +"; " + geocodingDataModel.getCity());
+//                view.setCityName(geocodingDataModel.getCity());
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                e.printStackTrace();
+//            }
+//        });
     }
 
     public void loadHourlyForecast(double lat, double lon, final Calendar c){

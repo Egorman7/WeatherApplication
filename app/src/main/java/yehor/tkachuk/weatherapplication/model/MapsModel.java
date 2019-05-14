@@ -16,7 +16,7 @@ public class MapsModel {
     GeocodingApi geocodingApi;
 
     public MapsModel(Application application){
-        ((WeatherApp) application).getGeocoding().inject(this);
+        ((WeatherApp) application).getComponent().inject(this);
     }
 
     public void getGeocoding(String latlng, SingleObserver<GeocodingDataModel> observer){

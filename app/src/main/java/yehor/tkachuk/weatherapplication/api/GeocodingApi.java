@@ -6,8 +6,8 @@ import retrofit2.http.Query;
 import yehor.tkachuk.weatherapplication.model.data.GeocodingDataModel;
 
 public interface GeocodingApi {
-    String PARAMS = "json?key=AIzaSyDUK0oBo4KhYy804Jr3uez8tgn-Dilk9GA";
+    String PARAMS = "?language=ru&result_type=locality|administrative_area_level_1&key=AIzaSyAuIBEaMQrOm6lFzXfzR_3_yrZfM8vCMig";
 
-    @GET(PARAMS)
+    @GET("geocode/json?"+PARAMS)
     Single<GeocodingDataModel> getGeocoding(@Query("latlng") String latlng);
 }

@@ -8,6 +8,7 @@ public class WeatherDataModel {
     int humidity;
     String icon;
     public static double lat, lon;
+    public static String city;
 
     public WeatherDataModel(long datetime, double tempMin, double tempMax, double wind, double windDeg, int humidity, String icon) {
         this.datetime = Calendar.getInstance();
@@ -18,6 +19,10 @@ public class WeatherDataModel {
         this.windDeg = windDeg;
         this.humidity = humidity;
         this.icon = icon;
+    }
+
+    public static String getCity() {
+        return city;
     }
 
     public Calendar getDatetime() {

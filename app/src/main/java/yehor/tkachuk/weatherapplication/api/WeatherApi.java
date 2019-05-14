@@ -6,7 +6,7 @@ import retrofit2.http.Query;
 import yehor.tkachuk.weatherapplication.model.data.WeatherDataModel;
 
 public interface WeatherApi {
-    String PARAMS = "?units=metric&APPID=03705d03c452bc971b99acedea642e54";
+    String PARAMS = "?units=metric&lang=ru&APPID=03705d03c452bc971b99acedea642e54";
 
     @GET("forecast/hourly" + PARAMS)
     Single<WeatherDataModel[]> getHourlyForecast(@Query("lat") double lat, @Query("lon") double lon);

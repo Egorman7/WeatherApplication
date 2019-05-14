@@ -1,5 +1,7 @@
 package yehor.tkachuk.weatherapplication.api.deserializers;
 
+import android.util.Log;
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -13,6 +15,7 @@ import yehor.tkachuk.weatherapplication.model.data.GeocodingDataModel;
 public class GeocodingDeserializer implements JsonDeserializer<GeocodingDataModel> {
     @Override
     public GeocodingDataModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        Log.d(getClass().getSimpleName(), json.toString());
         JsonObject address = json.getAsJsonObject().getAsJsonArray("results").get(0).getAsJsonObject();
         String city = address.getAsJsonArray("address_components").get(4).getAsJsonObject().get("long_name").getAsString();
         JsonObject coord = address.getAsJsonObject("geometry").getAsJsonObject("viewport").getAsJsonObject("northeast");
