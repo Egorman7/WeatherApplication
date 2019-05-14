@@ -1,7 +1,5 @@
 package yehor.tkachuk.weatherapplication.presenter;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -9,7 +7,6 @@ import java.util.Calendar;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import yehor.tkachuk.weatherapplication.model.MainModel;
-import yehor.tkachuk.weatherapplication.model.data.GeocodingDataModel;
 import yehor.tkachuk.weatherapplication.model.data.WeatherDataModel;
 import yehor.tkachuk.weatherapplication.view.interfaces.IMainView;
 
@@ -41,23 +38,6 @@ public class MainPresenter {
                 e.printStackTrace();
             }
         });
-//        model.getGeocoding(String.format("%1$.0f",lat) + "," + String.format("%1$.0f",lon), new SingleObserver<GeocodingDataModel>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//                view.showToast("Loading city name...");
-//            }
-//
-//            @Override
-//            public void onSuccess(GeocodingDataModel geocodingDataModel) {
-//                Log.d(MainPresenter.class.getSimpleName(), geocodingDataModel.getLat() + "; " + geocodingDataModel.getLon() +"; " + geocodingDataModel.getCity());
-//                view.setCityName(geocodingDataModel.getCity());
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                e.printStackTrace();
-//            }
-//        });
     }
 
     public void loadHourlyForecast(double lat, double lon, final Calendar c){

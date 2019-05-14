@@ -4,28 +4,13 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import yehor.tkachuk.weatherapplication.R;
 
 public class AppUtils {
     public static String getDayName(Calendar c){
-        switch (c.get(Calendar.DAY_OF_WEEK)) {
-            case Calendar.SUNDAY:
-                return "ВС";
-            case Calendar.MONDAY:
-                return "ПН";
-            case Calendar.TUESDAY:
-                return "ВТ";
-            case Calendar.WEDNESDAY:
-                return "СР";
-            case Calendar.THURSDAY:
-                return "ЧТ";
-            case Calendar.FRIDAY:
-                return "ПТ";
-            case Calendar.SATURDAY:
-                return "СБ";
-        }
-        return "";
+        return c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault());
     }
 
     public static String getTimeHours(Calendar c){
@@ -33,33 +18,7 @@ public class AppUtils {
     }
 
     public static String getMonthName(Calendar c){
-        switch (c.get(Calendar.MONTH)){
-            case Calendar.JANUARY:
-                return "ЯНВАРЯ";
-            case Calendar.FEBRUARY:
-                return "ФЕВРАЛЯ";
-            case Calendar.MARCH:
-                return "МАРТА";
-            case Calendar.APRIL:
-                return "АПРЕЛЯ";
-            case Calendar.MAY:
-                return "МАЯ";
-            case Calendar.JUNE:
-                return "ИЮНЯ";
-            case Calendar.JULY:
-                return "ИЮЛЯ";
-            case Calendar.AUGUST:
-                return "АВГУСТА";
-            case Calendar.SEPTEMBER:
-                return "СЕНТЯБРЯ";
-            case Calendar.OCTOBER:
-                return "ОКТЯБРЯ";
-            case Calendar.NOVEMBER:
-                return "НОЯБРЯ";
-            case Calendar.DECEMBER:
-                return "ДЕКАБРЯ";
-        }
-        return "";
+        return c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
     }
 
     public static String getDateString(Calendar c){

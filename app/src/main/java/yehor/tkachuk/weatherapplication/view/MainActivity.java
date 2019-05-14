@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private DailyViewAdapter mDailyAdapter;
     private HourlyViewAdapter mHourlyAdapter;
 
+    private int indexToSelect = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        loadLocation();
+        if(savedInstanceState == null)
+            loadLocation();
     }
 
     private void initView(){
@@ -108,9 +110,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 2){
             if(resultCode == 1){
+                indexToSelect =  0;
                 WeatherDataModel.lat = data.getDoubleExtra("lat", 0);
                 WeatherDataModel.lon = data.getDoubleExtra("lon", 0);
                 mPresenter.loadDailyForecast(WeatherDataModel.lat, WeatherDataModel.lon);
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void setDailyData(ArrayList<WeatherDataModel> data) {
         mDailyAdapter.setData(data);
-        mDailyAdapter.selectIndex(0);
+        mDailyAdapter.selectIndex(indexToSelect);
     }
 
     @Override
@@ -148,5 +150,22 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void setCityName(String cityName) {
         mCityName.setText(cityName);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble("lat", WeatherDataModel.lat);
+        outState.putDouble("lon", WeatherDataModel.lon);
+        outState.putInt("sel", mDailyAdapter.getSelectedIndex());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle data) {
+        super.onRestoreInstanceState(data);
+        WeatherDataModel.lat = data.getDouble("lat", 0);
+        WeatherDataModel.lon = data.getDouble("lon", 0);
+        indexToSelect  =  data.getInt("sel");
+        mPresenter.loadDailyForecast(WeatherDataModel.lat, WeatherDataModel.lon);
     }
 }

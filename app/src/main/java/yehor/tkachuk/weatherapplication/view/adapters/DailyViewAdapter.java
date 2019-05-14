@@ -71,9 +71,8 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.View
         });
     }
 
-    public WeatherDataModel getSelectedData(){
-        if(selectedIndex != -1) return data.get(selectedIndex);
-        return null;
+    public int getSelectedIndex(){
+        return selectedIndex;
     }
 
     public void selectIndex(int i){
