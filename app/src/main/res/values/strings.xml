@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Natife WeatherApplication</string>
+    <string name="menu_map">Карта</string>
+
+    <string name="temp">%1$.0f°/%2$.0f°</string>
+    <string name="humidity">%1$d%%</string>
+    <string name="wind">%1$.0f м/с</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
